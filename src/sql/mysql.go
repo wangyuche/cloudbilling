@@ -5,3 +5,10 @@ type MySQLSetting struct {
 	Password string `yaml:"Password,omitempty"`
 	Database string `yaml:"Database,omitempty"`
 }
+
+type MySQL struct {
+}
+
+func (this *MySQL) Init() {
+
+}
