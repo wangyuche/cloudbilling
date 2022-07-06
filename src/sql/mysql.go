@@ -102,17 +102,31 @@ func CreateProjectsTable(db *sql.DB) {
 
 func CreateBillingInfoTable(db *sql.DB) {
 	sql := `create table if not exists billinginfo (
-		Id INT NOT NULL AUTO_INCREMENT,
 		Idprojects INT NULL,
 		Time TIMESTAMP NULL,
 		Info JSON NULL,
-		Price INT NULL,
-		PRIMARY KEY (Id));`
+		Price INT NULL)
+		PARTITION BY RANGE (UNIX_TIMESTAMP(Time)) (
+			PARTITION p2022 VALUES LESS THAN (UNIX_TIMESTAMP('2022-01-01 00:00:00')),
+			PARTITION p2023 VALUES LESS THAN (UNIX_TIMESTAMP('2023-01-01 00:00:00')),
+			PARTITION p2024 VALUES LESS THAN (UNIX_TIMESTAMP('2024-01-01 00:00:00')),
+			PARTITION p2025 VALUES LESS THAN (UNIX_TIMESTAMP('2025-01-01 00:00:00')),
+			PARTITION p2026 VALUES LESS THAN (UNIX_TIMESTAMP('2026-01-01 00:00:00')),
+			PARTITION p2027 VALUES LESS THAN (UNIX_TIMESTAMP('2027-01-01 00:00:00')),
+			PARTITION p2028 VALUES LESS THAN (UNIX_TIMESTAMP('2028-01-01 00:00:00'))
+		);`
 	tx, err := db.Begin()
 	if err != nil {
 		panic(err.Error())
 	}
 	defer tx.Commit()
+	_, err = tx.Exec(sql)
+	if err != nil {
+		panic(err.Error())
+	}
+	sql = `ALTER TABLE billinginfo
+	ADD INDEX Idprojects (Idprojects ASC),
+	ADD INDEX Time (Time ASC);`
 	_, err = tx.Exec(sql)
 	if err != nil {
 		panic(err.Error())
