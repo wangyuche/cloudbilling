@@ -1,17 +1,15 @@
-module github.com/wangyuche/cloudbilling
+module github.com/wangyuche/cloudbilling/src/billing
 
 go 1.18
 
 require (
 	cloud.google.com/go/billing v1.2.0
-	github.com/wangyuche/cloudbilling/src/sql v0.0.0-20220704071454-d5afab0047ad
-	google.golang.org/genproto v0.0.0-20220624142145-8cd45d7dbd1f
-	gopkg.in/yaml.v3 v3.0.1
+	google.golang.org/api v0.86.0
+	google.golang.org/genproto v0.0.0-20220706185917-7780775163c4
 )
 
 require (
 	cloud.google.com/go/compute v1.7.0 // indirect
-	github.com/go-sql-driver/mysql v1.6.0 // indirect
 	github.com/golang/groupcache v0.0.0-20200121045136-8c9f03a8e57e // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/google/go-cmp v0.5.8 // indirect
@@ -22,10 +20,7 @@ require (
 	golang.org/x/oauth2 v0.0.0-20220622183110-fd043fe589d2 // indirect
 	golang.org/x/sys v0.0.0-20220624220833-87e55d714810 // indirect
 	golang.org/x/text v0.3.7 // indirect
-	google.golang.org/api v0.86.0 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
 	google.golang.org/grpc v1.47.0 // indirect
 	google.golang.org/protobuf v1.28.0 // indirect
 )
-
-replace github.com/wangyuche/cloudbilling/src/sql => ./src/sql
